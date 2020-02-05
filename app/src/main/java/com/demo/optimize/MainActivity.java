@@ -33,5 +33,7 @@ public class MainActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         LauncherTimer.stopRecord(LauncherTimer.Tag.onWindowFocusChanged);
+//        Debug.stopMethodTracing();
+//        Trace.endSection();
     }
 }

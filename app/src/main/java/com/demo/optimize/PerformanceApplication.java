@@ -17,6 +17,10 @@ public class PerformanceApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+//        String tracePath = getExternalCacheDir() + "/demo.trace";
+//        Debug.startMethodTracing(tracePath);
+//        TraceCompat.beginSection();
+//        Trace.beginSection("AppOnCreate");
         LauncherTimer.startRecord(LauncherTimer.Tag.onPreDraw);
         LauncherTimer.startRecord(LauncherTimer.Tag.onWindowFocusChanged);
         MultiDex.install(this);
