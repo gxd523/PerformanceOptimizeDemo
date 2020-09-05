@@ -1,23 +1,27 @@
 package com.demo.optimize;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
-
-import com.demo.optimize.databinding.ActivityMainBinding;
-
-import androidx.databinding.DataBindingUtil;
 
 public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         super.onCreate(savedInstanceState);
-        final ActivityMainBinding dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        dataBinding.titleTv.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+        final View view = Util.generateView(this, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DetailActivity.class));
+            }
+        });
+        setContentView(view);
+
+        view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                dataBinding.titleTv.getViewTreeObserver().removeOnPreDrawListener(this);
+                view.getViewTreeObserver().removeOnPreDrawListener(this);
                 LauncherTimer.stopRecord(LauncherTimer.Tag.onPreDraw);
                 return true;
             }
